@@ -35,12 +35,9 @@ class Workspace
 
     request = error_message(HTTParty.get(USERS_LIST_URL, query: query))
 
-
     raise ArgumentError, request if request.class == String
 
-
     @users = request["members"].map do |user|
-      ap user
       { name: user["name"],
         real_name: user["real_name"],
         id: user["id"] }
