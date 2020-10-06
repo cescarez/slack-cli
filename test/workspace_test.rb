@@ -1,5 +1,6 @@
 require_relative 'test_helper'
 
+# Is it most appropriate to create a whole set of false test data? Even for APIs???
 
 describe "workspace class" do
 
@@ -26,12 +27,25 @@ describe "workspace class" do
   describe "load channels" do
     before do
       @new_workspace = Workspace.new
+      @new_workspace.load_channels
+      @channel_list = @new_workspace.channels
     end
 
     it "loads channels" do
-      @new_workspace.load_channels
-      expect(@new_workspace.channels).wont_be_empty
+      expect(@channel_list).wont_be_empty
+    end
+
+    it "@channels is an array of hashes" do
+      expect(@channel_list).must_be_kind_of Array
+      expect(@channel_list.all? { |channel| channel.class == Hash }).must_equal true
+    end
+
+    it "correctly loads list of channels" do
+      current_channels = ["general", "random", "slackcli"]
+      expect(@channel_list.each { |channel| current_channels.include?(channel[:name]) })
+      expect(@channel_list.length).must_equal 3
     end
 
   end
+
 end

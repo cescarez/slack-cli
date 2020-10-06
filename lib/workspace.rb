@@ -10,7 +10,6 @@ class Workspace
   end
 
   def load_channels
-
     query = {
       token: ENV['SLACK_TOKEN']
     }
@@ -19,8 +18,15 @@ class Workspace
 
     raise ArgumentError, request if request.class == String
 
-    @channels = request["channels"].map { |channel| channel["name"] }
+    #README specifies "name, topic, member count, and Slack ID"; topic interpreted as 'purpose'
+    @channels = request["channels"].map do |channel|
+      { name: channel["name"],
+        topic: channel["purpose"]["value"],
+        member_count: channel["num_members"],
+        id: channel["id"] }
+    end
   end
+
 
   def error_message(response)
     if response.code != 200 || response["ok"] != true
