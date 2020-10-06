@@ -31,7 +31,7 @@ describe "workspace class" do
       @channel_list = @new_workspace.channels
     end
 
-    it "loads channels" do
+    it "populates the array" do
       expect(@channel_list).wont_be_empty
     end
 
@@ -47,5 +47,26 @@ describe "workspace class" do
     end
 
   end
+  describe "load users" do
+    before do
+      @new_workspace = Workspace.new
+      @new_workspace.load_users
+      @user_list = @new_workspace.users
+    end
+    it "populates the array" do
+      expect(@user_list).wont_be_empty
+    end
 
+    it "@users is an array of hashes" do
+      expect(@user_list).must_be_kind_of Array
+      expect(@user_list.all? { |user| user.class == Hash }).must_equal true
+    end
+
+    it "correctly loads list of channels" do
+      current_users = ["slackbot", "gomezrc1220", "water_christabel_slac", "christabel.escarez", "waterrachaelapi_proje",  ]
+      expect(@user_list.each { |user| current_users.include?(user[:name]) })
+      expect(@user_list.length).must_equal 5
+    end
+
+  end
 end

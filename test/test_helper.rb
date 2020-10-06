@@ -9,6 +9,7 @@ require 'minitest/reporters'
 require 'minitest/skip_dsl'
 require 'vcr'
 require 'httparty'
+require "awesome_print"
 require_relative '../lib/workspace'
 require_relative '../lib/channels'
 require_relative '../lib/users'
