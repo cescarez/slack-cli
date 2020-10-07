@@ -11,21 +11,14 @@ class Workspace
   end
 
   def load_channels
-    query = {
-      token: ENV['SLACK_TOKEN']
-    }
 
-    request = error_message(HTTParty.get(CONVERSATIONS_LIST_URL, query: query))
 
-    raise ArgumentError, request if request.class == String
 
-    #README specifies "name, topic, member count, and Slack ID"; topic interpreted as 'purpose'
-    @channels = request["channels"].map do |channel|
-      { name: channel["name"],
-        topic: channel["purpose"]["value"],
-        member_count: channel["num_members"],
-        id: channel["id"] }
-    end
+
+
+
+
+    @channels = Channel.list_all
   end
 
   def load_users

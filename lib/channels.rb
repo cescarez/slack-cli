@@ -1,19 +1,24 @@
-class Channel
+require 'test/test_helper'
+CONVERSATIONS_LIST_URL = "https://slack.com/api/conversations.list"
+class Channel < Recipient
+  attr_reader :topic, :member_count,
+  def initialize(slack_id, name, topic, member_count)
+    super(slack_id, name)
+    @topic = topic
+    @member_count = member_count
+  end
 
+  def details
+    return "Channel id: #{@slack_id}\nChannel name: #{@name}\nTopic: #{@topic}\nNumber of members: #{@member_count}"
+  end
 
-
-  def channel_name_list
-    query = {
-        token: ENV["SLACK_TOKEN"]
-    }
-
-    request = HTTParty.get(CONVERSATIONS_LIST_URL, query: query)
-
-    if request.code != 200 || request["ok"] != true
-      return "API request failed with error code #{request.code} and #{request["error"]}."
-    else
-      channel_names = request["channels"].map { |channel| channel["name"] }
-      return channel_names
+  def self.list_all
+    query = {token: ENV['SLACK_TOKEN']}
+    
+    request = self.get(CONVERSATIONS_LIST_URL, query )
+    
+    return request["channels"].map do |channel|
+      self.new(channel["id"], channel["name"], channel["purpose"]["value"], channel["num_members"])
     end
   end
 end
