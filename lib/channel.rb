@@ -1,7 +1,11 @@
-require 'test/test_helper'
+require_relative '../test/test_helper'
+require_relative 'recipient'
+
 CONVERSATIONS_LIST_URL = "https://slack.com/api/conversations.list"
+
 class Channel < Recipient
-  attr_reader :topic, :member_count,
+  attr_reader :topic, :member_count
+
   def initialize(slack_id, name, topic, member_count)
     super(slack_id, name)
     @topic = topic
@@ -18,7 +22,7 @@ class Channel < Recipient
     request = self.get(CONVERSATIONS_LIST_URL, query )
     
     return request["channels"].map do |channel|
-      self.new(channel["id"], channel["name"], channel["purpose"]["value"], channel["num_members"])
+      self.new(channel["id"], channel["name"], channel["purpose"]["value"], channel["num_members"].to_i)
     end
   end
 end
