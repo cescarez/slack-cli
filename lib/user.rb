@@ -1,5 +1,8 @@
-require_relative "test/test_helper"
+require_relative '../test/test_helper'
+require_relative 'recipient'
+
 USERS_LIST_URL = "https://slack.com/api/users.list"
+
 class User < Recipient
   attr_reader :real_name, :status_text, :status_emoji
   def initialize(slack_id, name, real_name, status_text, status_emoji)
