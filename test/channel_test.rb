@@ -66,6 +66,9 @@ describe "Channel class" do
     it "returns String" do
       expect(@details).must_be_kind_of String
     end
+    it "returns the correct string" do
+      expect(@details).must_equal "Channel id: some_id\nChannel name: some_name\nTopic: some topic\nNumber of members: 300"
+    end
 
   end
 
