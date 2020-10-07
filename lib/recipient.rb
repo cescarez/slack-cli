@@ -23,7 +23,7 @@ class Recipient
 
   def self.error_message(response)
     if response.code != 200 || response["ok"] != true
-      raise ArgumentError "API request failed with error code #{response.code} and #{response["error"]}."
+      raise ArgumentError, "API request failed with error code #{response.code} and #{response["error"]}."
     else
       return response
     end

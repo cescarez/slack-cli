@@ -33,7 +33,7 @@ describe "Channel class" do
     end
 
     it "calls Slack API conversations.list" do
-      VCR.use_cassette("get conversations.list") do
+      VCR.use_cassette("get conversations list") do
         conversations = Channel.get(CONVERSATIONS_LIST_URL, query: @query)
 
         channel_names = conversations["channels"].map { |channel| channel["name"] }
@@ -48,7 +48,11 @@ describe "Channel class" do
     end
 
     it "will raise an exception if the search fails" do
-
+      VCR.use_cassette("get conversations list") do
+        expect {
+          Channel.get(CONVERSATIONS_LIST_URL, query: {token: "unauthed test token"})
+        }.must_raise ArgumentError
+      end
     end
   end
 
