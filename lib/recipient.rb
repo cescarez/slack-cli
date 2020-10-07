@@ -9,6 +9,7 @@ class Recipient
   #
   # end
   def self.get(url, params)
+    sleep(1)
     return error_message(HTTParty.get(url,params))
   end
 

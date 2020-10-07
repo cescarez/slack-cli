@@ -17,9 +17,9 @@ class Channel < Recipient
   end
 
   def self.list_all
-    query = {token: ENV['SLACK_TOKEN']}
+    query = {token: ENV["SLACK_TOKEN"]}
     
-    request = self.get(CONVERSATIONS_LIST_URL, query )
+    request = self.get(CONVERSATIONS_LIST_URL, query: query)
     
     return request["channels"].map do |channel|
       self.new(channel["id"], channel["name"], channel["purpose"]["value"], channel["num_members"].to_i)
