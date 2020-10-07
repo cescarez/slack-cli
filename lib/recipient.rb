@@ -29,4 +29,5 @@ class Recipient
       return response
     end
   end
+
 end

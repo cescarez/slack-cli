@@ -54,33 +54,38 @@ describe "Channel class" do
         }.must_raise ArgumentError
       end
     end
+
   end
 
   describe "details" do
+    before do
+      @new_channel = Channel.new("some_id", "some_name", "some topic", 300)
+      @details = @new_channel.details
+    end
+
+    it "returns String" do
+      expect(@details).must_be_kind_of String
+    end
 
   end
 
   describe "self.list_all" do
+
     before do
-      @new_channel = Channel.new("some_id", "some_name", "some topic", 300)
-      @new_channel.load_channels
-      @channel_list = @new_workspace.channels
+      VCR.use_cassette("get conversations list") do
+        @channel_list = Channel.list_all
+      end
     end
 
     it "populates the array" do
       expect(@channel_list).wont_be_empty
     end
 
-    it "@channels is an array of hashes" do
+    it "@channels is an array of Channel objects" do
       expect(@channel_list).must_be_kind_of Array
-      expect(@channel_list.all? { |channel| channel.class == Hash }).must_equal true
+      expect(@channel_list.all? { |channel| channel.class == Channel }).must_equal true
     end
 
-    it "correctly loads list of channels" do
-      current_channels = ["general", "random", "slackcli"]
-      expect(@channel_list.each { |channel| current_channels.include?(channel[:name]) })
-      expect(@channel_list.length).must_equal 3
-    end
   end
 
 end
