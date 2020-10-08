@@ -26,7 +26,7 @@ VCR.configure do |config|
   config.allow_http_connections_when_no_cassette = true #added by Rachael and Christabel to allow to HTTP Requests without cassettes
 
   # Don't leave our token lying around in a cassette file.
-  config.filter_sensitive_data("<SLACK_TOKEN>") do
+  config.filter_sensitive_data("SLACK_TOKEN") do
     ENV["SLACK_TOKEN"]
   end
 
