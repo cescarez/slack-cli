@@ -25,7 +25,7 @@ VCR.configure do |config|
     :match_requests_on => [:method, :uri, :body], # The http method, URI and body of a request all need to match
   }
 
-  # config.allow_http_connections_when_no_cassette = true #added by Rachael and Christabel to allow to HTTP Requests without cassettes
+  config.allow_http_connections_when_no_cassette = true #added by Rachael and Christabel to allow to HTTP Requests without cassettes
 
   # Don't leave our token lying around in a cassette file.
   config.filter_sensitive_data("<SLACK_TOKEN>") do
