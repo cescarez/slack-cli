@@ -49,7 +49,7 @@ describe "User class" do
     end
 
     it "will raise an exception if the search fails" do
-      VCR.use_cassette("get users list") do
+      VCR.use_cassette("users list - failing token") do
         expect {
           User.get(USERS_LIST_URL, query: {token: "unauthed test token"})
         }.must_raise SlackApiError
