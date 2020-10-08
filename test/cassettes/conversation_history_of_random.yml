@@ -1,0 +1,210 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://slack.com/api/conversations.history
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Oct 2020 19:48:46 GMT
+      Server:
+      - Apache
+      X-Xss-Protection:
+      - '0'
+      Referrer-Policy:
+      - no-referrer
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - conversations:history
+      X-Slack-Req-Id:
+      - dddacca454c7dfc31d5cc183d3506b8e
+      X-Slack-Backend:
+      - r
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '53'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Via:
+      - haproxy-www-bqpd,haproxy-edge-pdx-sqqp
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+  recorded_at: Thu, 08 Oct 2020 19:48:46 GMT
+- request:
+    method: get
+    uri: https://slack.com/api/conversations.history?channel=C01BKRLQ4UF&token=SLACK_TOKEN
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Oct 2020 19:50:30 GMT
+      Server:
+      - Apache
+      X-Slack-Req-Id:
+      - e567e79163e0b091b14b587d1f32ad45
+      X-Oauth-Scopes:
+      - users:read,chat:write,channels:read,channels:history,im:history,im:read
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Slack-Backend:
+      - r
+      X-Content-Type-Options:
+      - nosniff
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      X-Xss-Protection:
+      - '0'
+      X-Accepted-Oauth-Scopes:
+      - channels:history,groups:history,mpim:history,im:history,read
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Content-Length:
+      - '807'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Via:
+      - haproxy-www-xhax,haproxy-edge-pdx-8rbg
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":true,"messages":[{"bot_id":"B01CQDPVC48","type":"message","text":"test
+        message to SlackBot","user":"U01C0JB1FB4","ts":"1602183916.001400","team":"T01BKRLPT7Z","bot_profile":{"id":"B01CQDPVC48","deleted":false,"name":"Water
+        - Christabel - Slack CLI","updated":1601943921,"app_id":"A01C0J7RNGJ","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BKRLPT7Z"}},{"bot_id":"B01CQDPVC48","type":"message","text":"Testing","user":"U01C0JB1FB4","ts":"1602182784.001300","team":"T01BKRLPT7Z","bot_profile":{"id":"B01CQDPVC48","deleted":false,"name":"Water
+        - Christabel - Slack CLI","updated":1601943921,"app_id":"A01C0J7RNGJ","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BKRLPT7Z"}},{"bot_id":"B01BXFQKZ4M","type":"message","text":"test","user":"U01C6PZLEBW","ts":"1602182077.001200","team":"T01BKRLPT7Z","bot_profile":{"id":"B01BXFQKZ4M","deleted":false,"name":"Water-Rachael-API
+        Project","updated":1601943944,"app_id":"A01BTS37RQE","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BKRLPT7Z"}},{"bot_id":"B01CQDPVC48","type":"message","text":"getting
+        the http response","user":"U01C0JB1FB4","ts":"1602181895.001100","team":"T01BKRLPT7Z","bot_profile":{"id":"B01CQDPVC48","deleted":false,"name":"Water
+        - Christabel - Slack CLI","updated":1601943921,"app_id":"A01C0J7RNGJ","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BKRLPT7Z"}},{"type":"message","subtype":"channel_join","ts":"1602181416.000900","user":"U01C6PZLEBW","text":"<@U01C6PZLEBW>
+        has joined the channel","inviter":"U01BXFBQ18D"},{"bot_id":"B01CQDPVC48","type":"message","text":"getting
+        the http response","user":"U01C0JB1FB4","ts":"1602180915.000600","team":"T01BKRLPT7Z","bot_profile":{"id":"B01CQDPVC48","deleted":false,"name":"Water
+        - Christabel - Slack CLI","updated":1601943921,"app_id":"A01C0J7RNGJ","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BKRLPT7Z"}},{"bot_id":"B01CQDPVC48","type":"message","text":"test
+        tag @christabel","user":"U01C0JB1FB4","ts":"1602175044.000300","team":"T01BKRLPT7Z","bot_profile":{"id":"B01CQDPVC48","deleted":false,"name":"Water
+        - Christabel - Slack CLI","updated":1601943921,"app_id":"A01C0J7RNGJ","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BKRLPT7Z"}},{"bot_id":"B01CQDPVC48","type":"message","text":"test
+        tag @christabel.escarez","user":"U01C0JB1FB4","ts":"1602175034.000200","team":"T01BKRLPT7Z","bot_profile":{"id":"B01CQDPVC48","deleted":false,"name":"Water
+        - Christabel - Slack CLI","updated":1601943921,"app_id":"A01C0J7RNGJ","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BKRLPT7Z"}},{"bot_id":"B01CQDPVC48","type":"message","text":"test
+        from postman","user":"U01C0JB1FB4","ts":"1602174851.000100","team":"T01BKRLPT7Z","bot_profile":{"id":"B01CQDPVC48","deleted":false,"name":"Water
+        - Christabel - Slack CLI","updated":1601943921,"app_id":"A01C0J7RNGJ","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BKRLPT7Z"}},{"bot_id":"B01CQDPVC48","type":"message","text":"still
+        testing","user":"U01C0JB1FB4","ts":"1602135002.000900","team":"T01BKRLPT7Z","bot_profile":{"id":"B01CQDPVC48","deleted":false,"name":"Water
+        - Christabel - Slack CLI","updated":1601943921,"app_id":"A01C0J7RNGJ","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BKRLPT7Z"}},{"bot_id":"B01CQDPVC48","type":"message","text":"test
+        post in #random","user":"U01C0JB1FB4","ts":"1602132666.000800","team":"T01BKRLPT7Z","bot_profile":{"id":"B01CQDPVC48","deleted":false,"name":"Water
+        - Christabel - Slack CLI","updated":1601943921,"app_id":"A01C0J7RNGJ","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BKRLPT7Z"}},{"bot_id":"B01CQDPVC48","type":"message","text":"testing","user":"U01C0JB1FB4","ts":"1602130103.000700","team":"T01BKRLPT7Z","bot_profile":{"id":"B01CQDPVC48","deleted":false,"name":"Water
+        - Christabel - Slack CLI","updated":1601943921,"app_id":"A01C0J7RNGJ","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BKRLPT7Z"}},{"bot_id":"B01CQDPVC48","type":"message","text":"\"\"","user":"U01C0JB1FB4","ts":"1602099597.000400","team":"T01BKRLPT7Z","bot_profile":{"id":"B01CQDPVC48","deleted":false,"name":"Water
+        - Christabel - Slack CLI","updated":1601943921,"app_id":"A01C0J7RNGJ","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BKRLPT7Z"}},{"bot_id":"B01CQDPVC48","type":"message","text":"beep
+        boop bop bop","user":"U01C0JB1FB4","ts":"1602099517.000300","team":"T01BKRLPT7Z","bot_profile":{"id":"B01CQDPVC48","deleted":false,"name":"Water
+        - Christabel - Slack CLI","updated":1601943921,"app_id":"A01C0J7RNGJ","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T01BKRLPT7Z"}},{"type":"message","subtype":"channel_join","ts":"1602099164.000200","user":"U01C0JB1FB4","text":"<@U01C0JB1FB4>
+        has joined the channel","inviter":"U01C6PPQXJQ"},{"type":"message","subtype":"channel_join","ts":"1601943727.000500","user":"U01C6PPQXJQ","text":"<@U01C6PPQXJQ>
+        has joined the channel"},{"type":"message","subtype":"channel_join","ts":"1601943301.000200","user":"U01BXFBQ18D","text":"<@U01BXFBQ18D>
+        has joined the channel"}],"has_more":false,"pin_count":0,"channel_actions_ts":null,"channel_actions_count":0}'
+  recorded_at: Thu, 08 Oct 2020 19:50:30 GMT
+- request:
+    method: get
+    uri: https://slack.com/api/conversations.replies?channel=C01BKRLQ4UF&token=SLACK_TOKEN
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Oct 2020 20:34:36 GMT
+      Server:
+      - Apache
+      X-Slack-Req-Id:
+      - 68afdcc1719573622d99ff92a9abe5fe
+      X-Oauth-Scopes:
+      - identify,channels:history
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Slack-Backend:
+      - r
+      X-Content-Type-Options:
+      - nosniff
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      X-Xss-Protection:
+      - '0'
+      X-Accepted-Oauth-Scopes:
+      - channels:history,groups:history,mpim:history,im:history,read
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Content-Length:
+      - '59'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Via:
+      - haproxy-www-d7ap,haproxy-edge-pdx-snuh
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"thread_not_found"}'
+  recorded_at: Thu, 08 Oct 2020 20:34:36 GMT
+recorded_with: VCR 6.0.0
