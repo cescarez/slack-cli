@@ -1,3 +1,4 @@
+require 'httparty'
 require_relative 'slack_api_error'
 
 POST_MESSAGE_URL = "https://slack.com/api/chat.postMessage"
@@ -25,13 +26,13 @@ class Recipient
   end
 
   def send_message(message)
-    sleep(1)
     params = {
       token: self.class.get_slack_token,
       channel: slack_id,
       text: message
     }
     HTTParty.post(POST_MESSAGE_URL, body: params)
+    sleep(1)
   end
 
   private
