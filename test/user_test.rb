@@ -28,14 +28,9 @@ describe "User class" do
   end
 
   describe "self.get" do
-
-    before do
-      @query = {token: ENV["SLACK_TOKEN"]}
-    end
-
     it "calls Slack API users.list" do
       VCR.use_cassette("get users list") do
-        users = User.get(USERS_LIST_URL, query: @query)
+        users = User.get(USERS_LIST_URL)
 
         user_names = users["members"].map { |user| user["name"] }
 
@@ -47,15 +42,6 @@ describe "User class" do
         end
       end
     end
-
-    it "will raise an exception if the search fails" do
-      VCR.use_cassette("users list - failing token") do
-        expect {
-          User.get(USERS_LIST_URL, query: {token: "unauthed test token"})
-        }.must_raise SlackApiError
-      end
-    end
-
   end
 
   describe "details" do
@@ -89,25 +75,6 @@ describe "User class" do
     it "@channels is an array of User objects" do
       expect(@user_list).must_be_kind_of Array
       expect(@user_list.all? { |user| user.class == User }).must_equal true
-    end
-
-  end
-
-  describe "self.send_message" do
-
-    before do
-      @new_user = User.new("test_id", "test_name")
-    end
-
-    it "posts in a channel" do
-      VCR.use_cassette("post in #random channel") do
-        query = {
-            token: ENV['SLACK_TOKEN'],
-            channel: "random",
-            text: "testing"
-        }
-        @new_user.send_message(query)
-      end
     end
 
   end
