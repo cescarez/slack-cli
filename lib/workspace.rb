@@ -2,7 +2,6 @@ require_relative '../test/test_helper'
 require_relative 'user'
 require_relative 'channel'
 
-USERS_LIST_URL = "https://slack.com/api/users.list"
 
 class Workspace
   attr_reader :users, :channels
@@ -20,11 +19,19 @@ class Workspace
     @users = User.list_all
   end
 
-  def error_message(response)
-    if response.code != 200 || response["ok"] != true
-      return "API request failed with error code #{response.code} and #{response["error"]}."
+  def select_channel(search_term)
+    return @channels.find{|channel| channel.name == search_term.downcase || channel.slack_id == search_term.upcase}
+  end
+
+  def select_user(search_term)
+    return @users.find{|user| user.name == search_term.downcase || user.slack_id == search_term.upcase}
+  end
+
+  def show_details(recipient)
+    if recipient
+      return recipient.details
     else
-      return response
+      return "No recipient available to display details"
     end
   end
 

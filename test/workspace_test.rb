@@ -24,28 +24,77 @@ describe "workspace class" do
     end
 
   end
-
+  describe "load channels" do
+    before do
+      VCR.use_cassette("get conversations list") do
+        @new_workspace = Workspace.new
+        @new_workspace.load_channels
+      end
+    end
+    it "populates the @channels instance variable" do
+      expect(@new_workspace.channels).wont_be_empty
+    end
+  end
 
   describe "load users" do
     before do
+      VCR.use_cassette("get users list") do
+        @new_workspace = Workspace.new
+        @new_workspace.load_users
+      end
+    end
+    it "populates the @users instance variable" do
+      expect(@new_workspace.users).wont_be_empty
+    end
+  end
+  
+  describe "select channel" do
+    before do
+      VCR.use_cassette("get conversations list") do
+        @new_workspace = Workspace.new
+        @new_workspace.load_channels
+      end
+    end
+    it "returns a channel object" do
+      found_channel = @new_workspace.select_channel("random")
+      expect(found_channel).must_be_kind_of Channel
+    end
+    it "returns nil if object not found" do
+      not_found_channel = @new_workspace.select_channel("bloop")
+      expect(not_found_channel).must_be_nil
+    end
+  end
+
+  describe "select user" do
+    before do
+      VCR.use_cassette("get users list") do
+        @new_workspace = Workspace.new
+        @new_workspace.load_users
+      end
+    end
+    it "returns a user object" do
+      found_user = @new_workspace.select_user("slackbot")
+      expect(found_user).must_be_kind_of User
+    end
+    it "returns nil if object not found" do
+      not_found_user = @new_workspace.select_user("bloop")
+      expect(not_found_user).must_be_nil
+    end
+  end
+
+  describe "show details" do
+    before do
       @new_workspace = Workspace.new
-      @new_workspace.load_users
-      @user_list = @new_workspace.users
+      VCR.use_cassette("get users list") do
+        @new_workspace.load_users
+      end
+      VCR.use_cassette("get conversations list") do
+        @new_workspace.load_channels
+      end
     end
-    it "populates the array" do
-      expect(@user_list).wont_be_empty
+    it "returns String" do
+      found_user = @new_workspace.select_user("slackbot")
+      expect(show_details(found_user)).must_be_kind_of String
     end
-
-    it "@users is an array of hashes" do
-      expect(@user_list).must_be_kind_of Array
-      expect(@user_list.all? { |user| user.class == Hash }).must_equal true
-    end
-
-    it "correctly loads list of channels" do
-      current_users = ["slackbot", "gomezrc1220", "water_christabel_slac", "christabel.escarez", "waterrachaelapi_proje",  ]
-      expect(@user_list.each { |user| current_users.include?(user[:name]) })
-      expect(@user_list.length).must_equal 5
-    end
-
   end
 end
