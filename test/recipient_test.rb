@@ -112,4 +112,25 @@ describe "Recipient class" do
 
   end
 
+  describe "conversation_history" do
+    let (:random_channel) { Recipient.new("C01BKRLQ4UF", "random") }
+    let (:slackbot) { Recipient.new("USLACKBOT", "slackbot") }
+
+    #User conversation history doesn't work -- possible need conversation.replies or user.conversations
+    it "shows conversation history of user" do
+      VCR.use_cassette("conversation history of slackbot") do
+        response = slackbot.conversation_history
+        expect(response["ok"]).must_equal true
+      end
+    end
+
+    it "shows conversation history of channel" do
+      VCR.use_cassette("conversation history of #random") do
+        response = random_channel.conversation_history
+        expect(response["ok"]).must_equal true
+      end
+    end
+
+  end
+
 end
