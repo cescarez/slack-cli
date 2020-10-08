@@ -31,7 +31,7 @@ class Workspace
     if recipient
       return recipient.details
     else
-      return "No recipient available to display details"
+      return "Invalid recipient. Unable to display details"
     end
   end
 

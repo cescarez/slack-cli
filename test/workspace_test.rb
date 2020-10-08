@@ -104,11 +104,11 @@ describe "workspace class" do
     end
     it "returns message for no details available" do
       found_channel = @new_workspace.select_channel("nope")
-      expect(@new_workspace.show_details(found_channel)).must_equal "No recipient available to display details"
+      expect(@new_workspace.show_details(found_channel)).must_equal "Invalid recipient. Unable to display details"
     end
     it "returns message for no details available" do
       found_user = @new_workspace.select_user("nope2.0")
-      expect(@new_workspace.show_details(found_user)).must_equal "No recipient available to display details"
+      expect(@new_workspace.show_details(found_user)).must_equal "Invalid recipient. Unable to display details"
     end
   end
 end
