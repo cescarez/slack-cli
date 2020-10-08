@@ -68,19 +68,48 @@ describe "Recipient class" do
   end
 
   describe "self.send_message" do
+    let (:random_channel) { Recipient.new("C01BKRLQ4UF", "random") }
+    let (:slackbot) { Recipient.new("USLACKBOT", "slackbot") }
+
     it "posts in a channel" do
       VCR.use_cassette("post in #random channel") do
-        random_channel = Recipient.new("C01BKRLQ4UF", "random")
-        random_channel.send_message("test message to SlackBot")
+        response = random_channel.send_message("test message to SlackBot")
+        expect(response["ok"]).must_equal true
       end
     end
 
     it "sends message to user" do
       VCR.use_cassette("sends SlackBot a message") do
-        slackbot = Recipient.new("USLACKBOT", "slackbot")
-        slackbot.send_message("test post in #random")
+        response = slackbot.send_message("test post in #random")
+        expect(response["ok"]).must_equal true
       end
     end
+
+    it "expect error_message for nil `text` to a channel" do
+      VCR.use_cassette("post message to channel -- nil message") do
+        expect {
+          random_channel.send_message(nil)
+        }.must_raise SlackApiError
+      end
+    end
+
+    it "expect error_message for nil `text` to a user" do
+      VCR.use_cassette("post message to user -- nil message") do
+        expect {
+          slackbot.send_message(nil)
+        }.must_raise SlackApiError
+      end
+    end
+
+    it "expect error_message for bad recipient" do
+      VCR.use_cassette("Exception for post message -- bad recipient") do
+        bad_recipient = Recipient.new("failure", "still a failure")
+        expect {
+          bad_recipient.send_message(@message)
+        }.must_raise SlackApiError
+      end
+    end
+
   end
 
 end
