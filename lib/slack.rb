@@ -5,27 +5,47 @@ def main
   workspace = Workspace.new
 
 
-  puts "1. list users\n2. list channels\n3. quit"
-  selection = input_validation(gets.chomp, 3)
+  puts "1. list users\n2. list channels\n3. select user\n4. select channel\n5. quit"
+  selection = number_validation(gets.chomp, 5)
 
-  while selection == 1 || selection == 2
-    if selection == 1
+  while (1..4).include? selection
+    case selection
+    when 1
       workspace.load_users
       ap workspace.users
-    else
+    when 2
       workspace.load_channels
       ap workspace.channels
+    when 3
+      workspace.load_users
+      puts "Please input a username or slack id"
+      selected_user = workspace.select_user(gets.chomp)
+      puts "Would you like details?"
+      details_selection = input_validation(gets.chomp.downcase)
+      if details_selection == "yes"
+        puts workspace.show_details(selected_user)
+      end
+    when 4
+      workspace.load_channels
+      puts "Please input a channel name or slack id"
+      selected_channel = workspace.select_channel(gets.chomp)
+      puts "Would you like details?"
+      details_selection = input_validation(gets.chomp.downcase)
+      if details_selection == "yes"
+        puts workspace.show_details(selected_channel)
+      end
+
     end
 
     puts "Make another selection:"
-    puts "1. list users\n2. list channels\n3. quit"
-    selection = input_validation(gets.chomp, 3)
+    puts "1. list users\n2. list channels\n3. select user\n4. select channel\n5. quit"
+    selection = number_validation(gets.chomp, 5)
   end
 
   puts "Thank you for using the Ada Slack CLI"
 end
 
-def input_validation(input, max_num)
+def number_validation(input, max_num)
   input = translate_input(input)
 
   while !(1..max_num).include? input
@@ -36,14 +56,26 @@ def input_validation(input, max_num)
   return input
 end
 
+def input_validation(input)
+  until ["yes", "no"].include? input
+    puts "Invalid input. Please re-enter either a yes or no."
+    input = gets.chomp.downcase
+  end
+  return input
+end
+
 def translate_input(string_input)
   case string_input.downcase
   when "list users", "1"
     return 1
   when "list channels", "2"
     return 2
-  when "quit", "3"
+  when "select user", "3"
     return 3
+  when "select channel", "4"
+    return 4
+  when "quit", "5"
+    return 5
   else
     return string_input
   end
