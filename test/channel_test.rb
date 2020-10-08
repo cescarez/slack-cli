@@ -51,7 +51,7 @@ describe "Channel class" do
       VCR.use_cassette("get conversations list") do
         expect {
           Channel.get(CONVERSATIONS_LIST_URL, query: {token: "unauthed test token"})
-        }.must_raise ArgumentError
+        }.must_raise SlackApiError
       end
     end
 

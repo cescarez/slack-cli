@@ -52,7 +52,7 @@ describe "User class" do
       VCR.use_cassette("get users list") do
         expect {
           User.get(USERS_LIST_URL, query: {token: "unauthed test token"})
-        }.must_raise ArgumentError
+        }.must_raise SlackApiError
       end
     end
 
