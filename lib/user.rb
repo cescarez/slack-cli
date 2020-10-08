@@ -1,4 +1,3 @@
-require_relative '../test/test_helper'
 require_relative 'recipient'
 
 USERS_LIST_URL = "https://slack.com/api/users.list"

@@ -1,7 +1,5 @@
-require_relative '../test/test_helper'
 require_relative 'user'
 require_relative 'channel'
-
 
 class Workspace
   attr_reader :users, :channels

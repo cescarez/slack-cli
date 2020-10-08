@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
+require 'dotenv'
 require_relative 'workspace'
+
 def main
+  Dotenv.load
+
   puts "Welcome to the Ada Slack CLI!"
   workspace = Workspace.new
 
