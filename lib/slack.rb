@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'dotenv'
-require 'awesome_print'
+require 'table_print'
 require_relative 'workspace'
 
 def main
@@ -13,44 +13,38 @@ def main
   puts "There are #{workspace.channels.length} channels and #{workspace.users.length} users."
 
   puts selection_items
+  print "Please make a selection: "
   selection = get_selection(gets.chomp)
 
   while (1..4).include? selection
     case selection
     when 1
-      ap workspace.users
+      tp workspace.users, "name", "slack_id", "real_name", "status_text", "status_emoji"
     when 2
-      ap workspace.channels
-    when 3
-      puts "Please input a username or slack id"
-      selected_user = workspace.select_user(gets.chomp)
+      tp workspace.channels, "name", "slack_id", "topic", "member_count"
+    when 3, 4
+      print "Please input a name or Slack ID: "
+      input = gets.chomp
 
-      if selected_user
-        puts "Would you like details about #{selected_user.real_name}?"
-        puts get_details(workspace, selected_user)
-
-        puts "Would you like to send #{selected_user.real_name} a message? (yes/no)"
-        send_message(selected_user)
+      if selection == 3
+        selected_recipient = workspace.select_user(input)
       else
-        puts "No user found."
+        selected_recipient = workspace.select_channel(input)
       end
-    when 4
-      puts "Please input a channel name or slack id"
-      selected_channel = workspace.select_channel(gets.chomp)
 
-      if selected_channel
-        puts "Would you like details?"
-        puts get_details(workspace, selected_channel)
+      if selected_recipient
+        print "Would you like details about the #{selected_recipient.class.to_s.downcase} '#{selected_recipient.name}'? (yes/no): "
+        puts get_details(workspace, selected_recipient)
 
-        puts "Would you like to post on the ##{selected_channel.name} channel? (yes/no)"
-        send_message(selected_channel)
+        print "Would you like to #{selected_recipient.class == User ? "send a message to " : "post a message on #"}#{selected_recipient.name}? (yes/no): "
+        send_message(selected_recipient)
       else
-        puts "No channel found"
+        puts "Nothing found with search term '#{input}'."
       end
     end
 
-    puts "Make another selection:"
     puts selection_items
+    print "Make another selection: "
     selection = get_selection(gets.chomp)
   end
 
@@ -70,10 +64,6 @@ def get_details(workspace, instance)
 end
 
 def send_message(instance)
-  if instance.class == User
-  elsif instance.class == Channel
-  end
-
   message_selection = input_validation(gets.chomp.downcase)
 
   if message_selection == "yes"
