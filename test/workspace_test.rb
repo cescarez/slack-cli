@@ -92,9 +92,23 @@ describe "workspace class" do
         @new_workspace.load_channels
       end
     end
-    it "returns String" do
+    it "returns String for user object" do
       found_user = @new_workspace.select_user("slackbot")
-      expect(show_details(found_user)).must_be_kind_of String
+
+      expect(@new_workspace.show_details(found_user)).must_be_kind_of String
+    end
+    it "returns String for channel object" do
+      found_channel = @new_workspace.select_channel("random")
+
+      expect(@new_workspace.show_details(found_channel)).must_be_kind_of String
+    end
+    it "returns message for no details available" do
+      found_channel = @new_workspace.select_channel("nope")
+      expect(@new_workspace.show_details(found_channel)).must_equal "No recipient available to display details"
+    end
+    it "returns message for no details available" do
+      found_user = @new_workspace.select_user("nope2.0")
+      expect(@new_workspace.show_details(found_user)).must_equal "No recipient available to display details"
     end
   end
 end
