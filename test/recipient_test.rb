@@ -27,38 +27,23 @@ describe "Recipient class" do
 
   describe "self.get" do
 
-    before do
-      @users_list_url = "https://slack.com/api/users.list"
-      @conversations_list_url = "https://slack.com/api/conversations.list"
-      @query = {token: ENV["SLACK_TOKEN"]}
-    end
-
-
     it "calls Slack API users.list" do
       VCR.use_cassette("get users list") do
-        Recipient.get(@users_list_url, query: @query)
+        Recipient.get("https://slack.com/api/users.list")
       end
     end
 
     it  "calls Slack API conversations.list" do
       VCR.use_cassette("get conversations list") do
-        Recipient.get(@conversations_list_url, query: @query)
+        Recipient.get("https://slack.com/api/conversations.list")
       end
 
     end
 
-    it "will raise an exception if the search fails for user" do
-      VCR.use_cassette("users list - failing token") do
+    it "will raise an exception if the request fails" do
+      VCR.use_cassette("Exception for false API URL") do
         expect {
-          Recipient.get(@users_list_url, query: {token: "unauthed test token"})
-        }.must_raise SlackApiError
-      end
-    end
-
-    it "will raise an exception if the search fails for channel" do
-      VCR.use_cassette("conversations list - failing token") do
-        expect {
-          Recipient.get(@conversations_list_url, query: {token: "unauthed test token"})
+          Recipient.get("https://slack.com/api/some_incorrect_endpoint")
         }.must_raise SlackApiError
       end
     end
@@ -83,25 +68,19 @@ describe "Recipient class" do
   end
 
   describe "self.send_message" do
-    before do
-      @new_recipient = Recipient.new("test_id", "test_name")
-    end
-
-    let :channel_post_params do
-      {
-        token: ENV['SLACK_TOKEN'],
-        channel: "random",
-        text: "testing"
-      }
-    end
-
     it "posts in a channel" do
       VCR.use_cassette("post in #random channel") do
-        @new_recipient.send_message(channel_post_params)
+        random_channel = Recipient.new("C01BKRLQ4UF", "random")
+        random_channel.send_message("test message to SlackBot")
       end
     end
 
-
+    it "sends message to user" do
+      VCR.use_cassette("sends SlackBot a message") do
+        slackbot = Recipient.new("USLACKBOT", "slackbot")
+        slackbot.send_message("test post in #random")
+      end
+    end
   end
 
 end
