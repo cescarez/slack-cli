@@ -10,9 +10,7 @@ require 'minitest/skip_dsl'
 require 'vcr'
 require 'httparty'
 require "awesome_print"
-# require_relative '../lib/workspace'
-# require_relative '../lib/channel'
-# require_relative '../lib/user'
+
 Dotenv.load
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
