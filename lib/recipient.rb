@@ -1,3 +1,7 @@
+require_relative 'slack_api_error'
+
+POST_MESSAGE_URL = "https://slack.com/api/chat.postMessage"
+
 class Recipient
   attr_reader :slack_id, :name
 
@@ -5,26 +9,28 @@ class Recipient
     @slack_id = slack_id
     @name = name
   end
-  # def send_meassage(message)
-  #
-  # end
+
   def self.get(url, params)
-    sleep(1)
     return error_message(HTTParty.get(url,params))
   end
 
   def details
     raise NotImplementedError, 'Implement me in a child class!'
   end
+
   def self.list_all
     raise NotImplementedError, 'Implement me in a child class!'
+  end
+
+  def send_message(params)
+    HTTParty.post(POST_MESSAGE_URL, body: params)
   end
 
   private
 
   def self.error_message(response)
     if response.code != 200 || response["ok"] != true
-      raise ArgumentError, "API request failed with error code #{response.code} and #{response["error"]}."
+      raise SlackApiError, "API request failed with error code #{response.code} and #{response["error"]}."
     else
       return response
     end
