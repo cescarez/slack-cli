@@ -12,7 +12,7 @@ class Channel < Recipient
   end
 
   def details
-    return "Channel id: #{@slack_id}\nChannel name: #{@name}\nTopic: #{@topic}\nNumber of members: #{@member_count}"
+    return "  Channel id: #{@slack_id}\n  Channel name: #{@name}\n  Topic: #{@topic}\n  Number of members: #{@member_count}"
   end
 
   def self.list_all
