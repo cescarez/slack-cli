@@ -27,14 +27,9 @@ describe "Channel class" do
   end
 
   describe "self.get" do
-
-    before do
-      @query = {token: ENV["SLACK_TOKEN"]}
-    end
-
     it "calls Slack API conversations.list" do
       VCR.use_cassette("get conversations list") do
-        conversations = Channel.get(CONVERSATIONS_LIST_URL, query: @query)
+        conversations = Channel.get(CONVERSATIONS_LIST_URL)
 
         channel_names = conversations["channels"].map { |channel| channel["name"] }
 
@@ -46,15 +41,6 @@ describe "Channel class" do
         end
       end
     end
-
-    it "will raise an exception if the search fails" do
-      VCR.use_cassette("conversations list - failing token") do
-        expect {
-          Channel.get(CONVERSATIONS_LIST_URL, query: {token: "unauthed test token"})
-        }.must_raise SlackApiError
-      end
-    end
-
   end
 
   describe "details" do
