@@ -4,3 +4,6 @@
 
 # Ignore environemnt variables
 .env
+.floo
+.flooignore
+.idea/
