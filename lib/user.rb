@@ -16,9 +16,7 @@ class User < Recipient
   end
 
   def self.list_all
-    query = {token: ENV['SLACK_TOKEN']}
-
-    request = self.get(USERS_LIST_URL, query: query)
+    request = self.get(USERS_LIST_URL)
 
     @users = request["members"].map do |user|
       self.new(user["id"],user["name"],user["real_name"],user["profile"]["status_text"],user["profile"]["status_emoji"])

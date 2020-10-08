@@ -10,8 +10,10 @@ class Recipient
     @name = name
   end
 
-  def self.get(url, params)
-    return error_message(HTTParty.get(url,params))
+  def self.get(url)
+    query = {token: get_slack_token}
+
+    return error_message(HTTParty.get(url, query: query))
   end
 
   def details
@@ -22,11 +24,21 @@ class Recipient
     raise NotImplementedError, 'Implement me in a child class!'
   end
 
-  def send_message(params)
+  def send_message(message)
+    sleep(1)
+    params = {
+      token: self.class.get_slack_token,
+      channel: slack_id,
+      text: message
+    }
     HTTParty.post(POST_MESSAGE_URL, body: params)
   end
 
   private
+
+  def self.get_slack_token
+    return ENV["SLACK_TOKEN"]
+  end
 
   def self.error_message(response)
     if response.code != 200 || response["ok"] != true
