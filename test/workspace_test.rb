@@ -111,4 +111,29 @@ describe "workspace class" do
       expect(@new_workspace.show_details(found_user)).must_equal "Invalid recipient. Unable to display details"
     end
   end
+
+  describe "self.send_message" do
+    before do
+      VCR.use_cassette("get users list") do
+        @new_workspace = Workspace.new
+      end
+    end
+
+    it "posts in a channel" do
+      VCR.use_cassette("post in #random channel") do
+        @new_workspace.load_channels
+        random_channel = @new_workspace.select_channel("random")
+        random_channel.send_message("test post in #random")
+      end
+    end
+
+    it "sends message to user" do
+      VCR.use_cassette("sends SlackBot a message") do
+        @new_workspace.load_users
+        slackbot = @new_workspace.select_user("slackbot")
+        slackbot.send_message("test message to SlackBot")
+      end
+    end
+
+  end
 end
