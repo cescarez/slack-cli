@@ -32,8 +32,8 @@ class Recipient
       channel: slack_id,
       text: message
     }
-    error_message(HTTParty.post(POST_MESSAGE_URL, body: params))
     sleep(1)
+    return self.class.error_message(HTTParty.post(POST_MESSAGE_URL, body: params))
   end
 
   private
