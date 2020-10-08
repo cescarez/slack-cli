@@ -32,7 +32,7 @@ class Recipient
       channel: slack_id,
       text: message
     }
-    HTTParty.post(POST_MESSAGE_URL, body: params)
+    error_message(HTTParty.post(POST_MESSAGE_URL, body: params))
     sleep(1)
   end
 
