@@ -8,7 +8,7 @@ class Channel < Recipient
   def initialize(slack_id, name, topic, member_count)
     super(slack_id, name)
     @topic = topic
-    @member_count = member_count
+    @member_count = member_count.to_i
   end
 
   def details
@@ -19,7 +19,7 @@ class Channel < Recipient
     request = self.get(CONVERSATIONS_LIST_URL)
     
     return request["channels"].map do |channel|
-      self.new(channel["id"], channel["name"], channel["purpose"]["value"], channel["num_members"].to_i)
+      self.new(channel["id"], channel["name"], channel["purpose"]["value"], channel["num_members"])
     end
   end
 end
