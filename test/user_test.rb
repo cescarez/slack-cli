@@ -93,4 +93,23 @@ describe "User class" do
 
   end
 
+  describe "self.send_message" do
+
+    before do
+      @new_user = User.new("test_id", "test_name")
+    end
+
+    it "posts in a channel" do
+      VCR.use_cassette("post in #random channel") do
+        query = {
+            token: ENV['SLACK_TOKEN'],
+            channel: "random",
+            text: "testing"
+        }
+        @new_user.send_message(query)
+      end
+    end
+
+  end
+
 end
