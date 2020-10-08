@@ -2,6 +2,7 @@ require 'httparty'
 require_relative 'slack_api_error'
 
 POST_MESSAGE_URL = "https://slack.com/api/chat.postMessage"
+CONVERSATIONS_HISTORY_URL = "https://api.slack.com/methods/conversations.history"
 
 class Recipient
   attr_reader :slack_id, :name
